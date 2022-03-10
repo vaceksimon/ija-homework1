@@ -5,8 +5,8 @@ package ija.homework1.uml;
  * Typ atributu je reprezentován třidou UMLClassifier. Lze použít jako atribut UML třídy nebo argument operace.
  */
 public class UMLAttribute extends Element {
-    private String name;
-    private UMLClassifier type;
+    String name;
+    UMLClassifier type;
 
     /**
      * Vytvoří instanci atributu.
