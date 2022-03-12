@@ -1,5 +1,6 @@
 package ija.homework1.uml;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,8 +9,6 @@ import java.util.List;
  * Obsahuje seznam tříd (instance třídy UMLClass) příp. klasifikátorů pro uživatelsky nedefinované typy (instance třídy UMLClassifier).
  */
 public class ClassDiagram extends Element {
-    private String name;
-    private List<UMLClass> classes;
     private List<UMLClassifier> classifiers;
 
     /**
@@ -18,6 +17,7 @@ public class ClassDiagram extends Element {
      */
     public ClassDiagram(String name) {
         super(name);
+        this.classifiers = new ArrayList<>();
     }
 
     /**
@@ -28,9 +28,17 @@ public class ClassDiagram extends Element {
      */
     public UMLClass createClass(String name) {
         UMLClass newClass = new UMLClass(name);
-        if(this.classes.contains(newClass))
+        if(this.classifiers.contains(newClass))
             return null;
-        this.classes.add(newClass);
+        this.classifiers.add(newClass);
+
+        if(findClassifier(name) == null) {
+            UMLClassifier newClassifier = new UMLClassifier(name, true);
+            this.classifiers.add(newClassifier);
+        }
+        else {
+            classifierForName(name).setUserDefined(true);
+        }
         return newClass;
     }
 
@@ -43,12 +51,12 @@ public class ClassDiagram extends Element {
      * @return Nalezený, příp. vytvořený, klasifikátor.
      */
     public UMLClassifier classifierForName(String name) {
-        UMLClassifier newClassifier = UMLClassifier.forName(name);
-        if(this.classifiers.contains(newClassifier))
-            return newClassifier;
-
-        this.classifiers.add(newClassifier);
-        return newClassifier;
+        UMLClassifier target = findClassifier(name);
+        if(target == null) {
+            target = UMLClassifier.forName(name);
+            this.classifiers.add(target);
+        }
+        return target;
     }
 
     /**
@@ -57,7 +65,10 @@ public class ClassDiagram extends Element {
      * @return Nalezený klasifikátor. Pokud v diagramu neexistuje klasifikátor daného jména, vrací null.
      */
     public UMLClassifier findClassifier(String name) {
-        UMLClassifier target = new UMLClassifier(name);
-        return this.classifiers.contains(target) ? target : null;
+        for(UMLClassifier target : this.classifiers) {
+            if(target.getName().equals(name))
+                return target;
+        }
+        return null;
     }
 }

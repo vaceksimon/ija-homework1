@@ -1,5 +1,6 @@
 package ija.homework1.uml;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +21,7 @@ public class UMLOperation extends UMLAttribute {
      */
     public UMLOperation(java.lang.String name, UMLClassifier type) {
         super(name, type);
+        attributes = new ArrayList<>();
     }
 
     /**

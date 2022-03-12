@@ -5,7 +5,6 @@ package ija.homework1.uml;
  * Odvozené třídy reprezentují konkrétní podoby klasifikátoru (třída, rozhraní, atribut, apod.)
  */
 public class UMLClassifier extends Element{
-    private String name;
     private boolean isUserDefined;
 
     /**
@@ -24,6 +23,7 @@ public class UMLClassifier extends Element{
      */
     public UMLClassifier(String name) {
         super(name);
+        this.isUserDefined = true;
     }
 
     /**
@@ -33,7 +33,7 @@ public class UMLClassifier extends Element{
      * @return Vytvořený klasifikátor.
      */
     public static UMLClassifier forName(String name) {
-        return new UMLClassifier(name);
+        return new UMLClassifier(name, false);
     }
 
     /**
@@ -50,6 +50,10 @@ public class UMLClassifier extends Element{
      */
     @Override
     public String toString() {
-        return String.format("%s(%s)", this.getName(), isUserDefined ? "true" : "false");
+        return String.format("%s(%s)", this.getName(), this.isUserDefined ? "true" : "false");
+    }
+
+    public void setUserDefined(boolean isUserDefined) {
+        this.isUserDefined = isUserDefined;
     }
 }

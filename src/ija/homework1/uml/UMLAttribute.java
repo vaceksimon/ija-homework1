@@ -5,7 +5,6 @@ package ija.homework1.uml;
  * Typ atributu je reprezentován třidou UMLClassifier. Lze použít jako atribut UML třídy nebo argument operace.
  */
 public class UMLAttribute extends Element {
-    String name;
     UMLClassifier type;
 
     /**
@@ -32,6 +31,6 @@ public class UMLAttribute extends Element {
      */
     @Override
     public java.lang.String toString() {
-        return String.format("%s:%s", this.name, this.type.toString());
+        return String.format("%s:%s", this.getName(), this.type.toString());
     }
 }

@@ -1,5 +1,6 @@
 package ija.homework1.uml;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import java.util.List;
  * Třída může být abstraktní.
  */
 public class UMLClass extends  UMLClassifier {
-    private String name;
     private boolean isAbstract;
     private List<UMLAttribute> attributes;
 
@@ -19,7 +19,8 @@ public class UMLClass extends  UMLClassifier {
      * @param name Název třídy (klasifikátoru).
      */
     public UMLClass(String name) {
-        super(name);
+        super(name, true);
+        attributes = new ArrayList<>();
     }
 
     /**
